@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0ea5e9;
+  --primary-glow: radial-gradient(rgba(14, 165, 233, 0.4), rgba(14, 165, 233, 0));
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-text: #1e293b;
+}
+
+.dark {
+  --primary: #38bdf8;
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-text: #f1f5f9;
+}
+
+body {
+  color: var(--glass-text);
+  background: #f8fafc;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background: #020617;
+}
+
+/* Glassmorphism Styles */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+.glass-card {
+  @apply glass rounded-2xl relative overflow-hidden;
+}
+
+/* Custom Textures */
+.texture-dots {
+  background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.dark .texture-dots {
+  background-image: radial-gradient(#1e293b 1px, transparent 1px);
+}
+
+/* Smooth Transitions */
+* {
+  @apply transition-all duration-300;
+}
