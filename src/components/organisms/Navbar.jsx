@@ -1,47 +1,59 @@
 "use client";
 
 import { useTheme } from "../../context/ThemeContext";
-import { Sun, Moon, Menu, BookOpen } from "lucide-react";
+import { Sun, Moon, Menu } from "lucide-react";
 import Link from "next/link";
+import styles from "../../styles/Effects.module.css";
+import { motion } from "framer-motion";
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
-      <div className="max-w-7xl mx-auto glass rounded-2xl px-6 py-3 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative w-10 h-10 group-hover:rotate-12 transition-transform">
+    <div className="fixed top-8 left-0 right-0 z-[100] px-6">
+      <motion.nav 
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="max-w-fit mx-auto glass-pill flex items-center gap-12 py-3 pr-4 shadow-2xl"
+      >
+        <Link href="/" className="flex items-center gap-3 group pl-4">
+          <div className="relative w-8 h-8 group-hover:scale-110 transition-transform">
             <img 
               src="/logo.png" 
-              alt="EDU-PULSE Logo" 
-              className="w-full h-full object-contain"
+              alt="Logo" 
+              className="w-full h-full object-contain filter invert dark:invert-0"
             />
           </div>
-          <span className="font-bold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-400">
+          <span className={`font-black text-lg tracking-tighter ${styles.glassyText} hidden sm:block uppercase`}>
             EDU-PULSE
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
-          <Link href="/courses" className="text-sm font-medium hover:text-primary-500 transition-colors">Courses</Link>
-          <Link href="/about" className="text-sm font-medium hover:text-primary-500 transition-colors">About</Link>
-          <Link href="/contact" className="text-sm font-medium hover:text-primary-500 transition-colors">Contact</Link>
+        <div className="hidden lg:flex items-center gap-8">
+          <Link href="/#categories" className="text-xs font-bold uppercase tracking-widest hover:text-[var(--primary)] transition-colors">Pathways</Link>
+          <Link href="/about" className="text-xs font-bold uppercase tracking-widest hover:text-[var(--primary)] transition-colors">Legacy</Link>
+          <Link href="/contact" className="text-xs font-bold uppercase tracking-widest hover:text-[var(--primary)] transition-colors">Connect</Link>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+            className="p-2.5 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-all active:scale-90"
           >
-            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+            {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
           </button>
           
-          <button className="md:hidden p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/5">
-            <Menu size={20} />
+          <Link href="/#categories">
+            <button className="btn-premium py-2 px-6 rounded-full text-xs uppercase tracking-widest">
+              Join Labs
+            </button>
+          </Link>
+
+          <button className="lg:hidden p-2.5 rounded-full hover:bg-black/5">
+            <Menu size={18} />
           </button>
         </div>
-      </div>
-    </nav>
+      </motion.nav>
+    </div>
   );
 }

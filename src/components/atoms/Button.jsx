@@ -8,10 +8,11 @@ export default function Button({
   ...props 
 }) {
   const variants = {
-    primary: "bg-primary-500 text-white hover:bg-primary-600 shadow-lg shadow-primary-500/30",
-    secondary: "bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 text-foreground",
-    outline: "border-2 border-primary-500 text-primary-500 hover:bg-primary-50",
-    ghost: "hover:bg-primary-50 text-foreground",
+    primary: "bg-[var(--primary)] text-white hover:opacity-90 shadow-lg shadow-violet-500/30",
+    secondary: "bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 text-[var(--text-main)]",
+    outline: "border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)]/5",
+    ghost: "hover:bg-black/5 dark:hover:bg-white/5 text-[var(--text-main)]",
+    premium: "btn-premium",
   };
 
   const sizes = {

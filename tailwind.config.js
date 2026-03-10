@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const config = {
+module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -30,7 +30,14 @@ const config = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  safelist: [
+    'bg-pink-50', 'bg-blue-50', 'bg-orange-50', 'bg-green-50',
+    'dark:bg-pink-900/20', 'dark:bg-blue-900/20', 'dark:bg-orange-900/20', 'dark:bg-green-900/20',
+    'text-pink-600', 'text-blue-600', 'text-orange-600', 'text-green-600',
+    'dark:text-pink-400', 'dark:text-blue-400', 'dark:text-orange-400', 'dark:text-green-400',
+    'bg-pink-500/10', 'bg-blue-500/10', 'bg-orange-500/10', 'bg-green-500/10',
+    'text-pink-500', 'text-blue-500', 'text-orange-500', 'text-green-500',
+    'border-pink-500/20', 'border-blue-500/20', 'border-orange-500/20', 'border-green-500/20',
+  ],
+  plugins: [],
 };
-
-export default config;

@@ -1,52 +1,63 @@
-import { BookOpen, Github, Twitter, Linkedin, Mail } from "lucide-react";
+import { Github, Twitter, Linkedin, Mail, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="mt-40 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 pt-20 pb-10 px-6">
+    <footer className="mt-32 pb-12 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="bg-primary-500 p-2 rounded-xl">
-                <BookOpen className="text-white w-6 h-6" />
+        <div className="glass-card p-12 md:p-16 relative overflow-hidden">
+          {/* Grid Background */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+               style={{backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px'}}>
+          </div>
+          
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-4 gap-16">
+            <div className="col-span-1 md:col-span-2">
+              <div className="flex items-center gap-3 mb-8">
+                 <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain filter invert dark:invert-0" />
+                 <span className="font-black text-2xl tracking-tighter uppercase italic text-gradient">EDU-PULSE</span>
               </div>
-              <span className="font-bold text-xl tracking-tight uppercase">EDU-PULSE</span>
-            </Link>
-            <p className="text-slate-500 dark:text-slate-400 max-w-sm mb-8">
-              Empowering learners of all ages with high-quality, interactive, and unique educational content. From the farm to the computer, we grow together.
-            </p>
-            <div className="flex items-center gap-4">
-              <a href="#" className="p-2 rounded-lg glass hover:text-primary-500 transition-colors"><Twitter size={20} /></a>
-              <a href="#" className="p-2 rounded-lg glass hover:text-primary-500 transition-colors"><Github size={20} /></a>
-              <a href="#" className="p-2 rounded-lg glass hover:text-primary-500 transition-colors"><Linkedin size={20} /></a>
+              <p className="text-[var(--text-muted)] max-w-sm mb-10 leading-relaxed text-lg">
+                The next dimension of childhood and technical excellence. Not just an LMS, but a knowledge vessel.
+              </p>
+              <div className="flex items-center gap-4">
+                {[Twitter, Github, Linkedin].map((Icon, i) => (
+                  <a key={i} href="#" className="p-3 rounded-2xl glass hover:border-[var(--primary)] text-[var(--text-main)] transition-all hover:-translate-y-1">
+                    <Icon size={20} />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <h4 className="font-black text-sm uppercase tracking-widest text-[var(--primary)]">Ecosystem</h4>
+              <ul className="space-y-4">
+                {['Early Childhood', 'Basic Computer', 'Poultry Farming', 'Plant Science'].map((item) => (
+                  <li key={item}>
+                    <Link href={`/courses/${item.toLowerCase().replace(/ /g, '-')}`} 
+                          className="text-sm font-medium hover:text-[var(--primary)] transition-all flex items-center gap-2 group">
+                      {item} <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="space-y-6">
+              <h4 className="font-black text-sm uppercase tracking-widest text-[var(--primary)]">Archives</h4>
+              <ul className="space-y-4 text-sm font-medium">
+                <li><Link href="#" className="hover:text-[var(--primary)] transition-all">Whitepapers</Link></li>
+                <li><Link href="#" className="hover:text-[var(--primary)] transition-all">Support Core</Link></li>
+                <li><Link href="#" className="hover:text-[var(--primary)] transition-all">Terminus</Link></li>
+              </ul>
             </div>
           </div>
 
-          <div>
-            <h4 className="font-bold mb-6">Learning paths</h4>
-            <ul className="space-y-4 text-sm text-slate-500 dark:text-slate-400">
-              <li><Link href="/courses/early-childhood" className="hover:text-primary-500 transition-colors">Early Childhood</Link></li>
-              <li><Link href="/courses/basic-computer" className="hover:text-primary-500 transition-colors">Basic Computer</Link></li>
-              <li><Link href="/courses/poultry" className="hover:text-primary-500 transition-colors">Poultry Farming</Link></li>
-              <li><Link href="/courses/plant" className="hover:text-primary-500 transition-colors">Plant Science</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold mb-6">Support</h4>
-            <ul className="space-y-4 text-sm text-slate-500 dark:text-slate-400">
-              <li><Link href="/faq" className="hover:text-primary-500 transition-colors">Help Center</Link></li>
-              <li><Link href="/contact" className="hover:text-primary-500 transition-colors">Contact Us</Link></li>
-              <li><Link href="/privacy" className="hover:text-primary-500 transition-colors">Privacy Policy</Link></li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-          <p>© 2026 EDU-PULSE LMS. All rights reserved.</p>
-          <div className="flex items-center gap-2">
-             <Mail size={16} /> info@edu-pulse.com
+          <div className="mt-20 pt-8 border-t border-[var(--glass-border)] flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
+            <p className="text-xs font-bold uppercase tracking-widest opacity-50">© 2026 TERMINAL VELOCITY CORP.</p>
+            <div className="flex items-center gap-3 px-6 py-2 glass rounded-full text-xs font-bold uppercase tracking-widest">
+               <Mail size={14} className="text-[var(--primary)]" /> pulse@edu.tech
+            </div>
           </div>
         </div>
       </div>

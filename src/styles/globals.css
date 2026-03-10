@@ -3,55 +3,113 @@
 @tailwind utilities;
 
 :root {
-  --primary: #0ea5e9;
-  --primary-glow: radial-gradient(rgba(14, 165, 233, 0.4), rgba(14, 165, 233, 0));
-  --glass-bg: rgba(255, 255, 255, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --glass-text: #1e293b;
+  --primary: #0284c7; /* Blue */
+  --primary-light: #38bdf8;
+  --accent: #0d9488; /* Teal */
+  --bg-main: #f8fafc; /* Light blue-gray */
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(2, 132, 199, 0.15);
+  --text-main: #0f172a; /* Navy */
+  --text-muted: #475569;
 }
 
 .dark {
-  --primary: #38bdf8;
-  --glass-bg: rgba(15, 23, 42, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-text: #f1f5f9;
+  --primary: #38bdf8; /* Light Blue */
+  --accent: #2dd4bf; /* Light Teal */
+  --bg-main: #020617; /* Deep Navy */
+  --glass-bg: rgba(2, 6, 23, 0.75);
+  --glass-border: rgba(56, 189, 248, 0.1);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
 }
 
-body {
-  color: var(--glass-text);
-  background: #f8fafc;
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+@layer base {
+  body {
+    @apply bg-[var(--bg-main)] text-[var(--text-main)] transition-colors duration-500;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
 }
 
-.dark body {
-  background: #020617;
+@layer components {
+  /* Ultra-Premium Glassmorphism */
+  .glass {
+    @apply backdrop-blur-xl bg-[var(--glass-bg)] border border-[var(--glass-border)] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)];
+  }
+
+  .glass-card {
+    @apply glass rounded-[2rem] overflow-hidden;
+  }
+
+  .glass-pill {
+    @apply glass rounded-full px-6 py-2;
+  }
+
+  /* Bento Grid Item */
+  .bento-item {
+    @apply glass-card relative p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer;
+  }
+
+  /* Premium Gradient Text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary)] to-[var(--accent)];
+  }
+
+  .btn-premium {
+    @apply relative overflow-hidden px-8 py-4 rounded-2xl font-bold transition-all duration-300 active:scale-95;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4);
+  }
+
+  .btn-premium::after {
+    content: '';
+    @apply absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300;
+  }
+
+  .btn-premium:hover::after {
+    @apply opacity-100;
+  }
 }
 
-/* Glassmorphism Styles */
-.glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+/* Enhanced Textures */
+.texture-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(2, 132, 199, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(2, 132, 199, 0.05) 1px, transparent 1px);
 }
 
-.glass-card {
-  @apply glass rounded-2xl relative overflow-hidden;
+.dark .texture-grid {
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
 }
 
-/* Custom Textures */
-.texture-dots {
-  background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
-  background-size: 20px 20px;
+/* Custom Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 
-.dark .texture-dots {
-  background-image: radial-gradient(#1e293b 1px, transparent 1px);
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
-/* Smooth Transitions */
-* {
-  @apply transition-all duration-300;
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-400/20 rounded-full hover:bg-slate-400/40 transition-colors;
+}
+
+/* Interactive Focus */
+*:focus-visible {
+  @apply outline-none ring-2 ring-violet-500 ring-offset-2 ring-offset-white dark:ring-offset-slate-900;
 }

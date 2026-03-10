@@ -1,9 +1,10 @@
-import "../styles/globals.css";
-import { Inter } from "next/font/google";
+import "@/styles/globals.css";
+import { Outfit } from "next/font/google";
 import { ThemeProvider } from "../context/ThemeContext";
+import Navbar from "@/components/organisms/Navbar";
 import Footer from "@/components/organisms/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata = {
   title: "EDU-PULSE | Early Childhood & Skills",
@@ -16,10 +17,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} texture-dots`}>
+      <body className={`${outfit.className} texture-grid antialiased`}>
         <ThemeProvider>
-          <div className="min-height-screen relative">
-            {children}
+          <div className="flex flex-col min-h-screen relative">
+            <Navbar />
+            <main className="flex-grow pt-24">
+              {children}
+            </main>
             <Footer />
           </div>
         </ThemeProvider>
